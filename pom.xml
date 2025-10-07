@@ -6,7 +6,13 @@
 
     <groupId>com.napier.sem</groupId>
     <artifactId>seMethods</artifactId>
-    <version>0.1.0.2-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -15,11 +21,6 @@
             <version>3.6.4</version>
         </dependency>
     </dependencies>
-
-    <properties>
-        <maven.compiler.source>10</maven.compiler.source>
-        <maven.compiler.target>10</maven.compiler.target>
-    </properties>
 
     <build>
         <plugins>
