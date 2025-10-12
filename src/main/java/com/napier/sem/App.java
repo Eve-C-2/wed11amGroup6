@@ -28,7 +28,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Code, Name, Continent "
+                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
                             + "FROM country "
                             + "WHERE Code = '" + countryCode + "'";
             // Execute SQL statement
@@ -41,6 +41,18 @@ public class App
                 country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
                 country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
+                country.SurfaceArea = rset.getFloat("SurfaceArea");
+                country.IndepYear = rset.getInt("IndepYear");
+                country.Population = rset.getInt("Population");
+                country.LifeExpectancy = rset.getFloat("LifeExpectancy");
+                country.GNP = rset.getFloat("GNP");
+                country.GNPOld = rset.getFloat("GNPOld");
+                country.LocalName = rset.getString("LocalName");
+                country.GovernmentForm = rset.getString("GovernmentForm");
+                country.HeadOfState = rset.getString("HeadOfState");
+                country.Capital = rset.getInt("Capital");
+                country.Code2 = rset.getString("Code2");
                 return country;
             }
             else
