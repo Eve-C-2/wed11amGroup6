@@ -11,9 +11,70 @@ public class App
 
         // Connect to database
         a.connect();
+        // Get Employee
+        Country country = a.getCountry("BIH");
+        // Display results
+        a.displayCountry(country);
 
         // Disconnect from database
         a.disconnect();
+    }
+
+    public Country getCountry(String countryCode)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent "
+                            + "FROM country "
+                            + "WHERE Code = '" + countryCode + "'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Country country = new Country();
+                country.Code = rset.getString("Code");
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                return country;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    public void displayCountry(Country country)
+    {
+        if (country != null)
+        {
+            System.out.println(
+                    country.Code + " "
+                            + country.Name + " "
+                            + country.Continent + "\n"
+                            + country.Region + "\n"
+                            + country.SurfaceArea + "\n"
+                            + country.IndepYear + "\n"
+                            + country.Population + "\n"
+                            + country.LifeExpectancy + "\n"
+                            + country.GNP + "\n"
+                            + country.GNPOld + "\n"
+                            + country.LocalName + "\n"
+                            + country.GovernmentForm + "\n"
+                            + country.HeadOfState + "\n"
+                            + country.Capital + "\n"
+                            + country.Code2 + "\n");
+        }
     }
 
         /**
