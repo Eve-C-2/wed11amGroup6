@@ -67,10 +67,6 @@ The analyst selects the command “Countries of the world by population.”
 
 None.
 
-## SUCCESS GUARANTEE 
-
-1. The user sees a correctly sorted list of all countries with required columns.
-
 ## SCHEDULE
 
 **DUE DATE**: *date or release of deployment*
