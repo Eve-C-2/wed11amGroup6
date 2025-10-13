@@ -28,7 +28,7 @@ A report is displayed showing all countries, sorted by population (from largest 
 
 ### Failed End Condition
 
-No report is produced.
+No report is produced, the system displays an appropriate message.
 
 ### Primary Actor
 

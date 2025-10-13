@@ -4,53 +4,65 @@
 
 ### Goal in Context
 
-*a longer statement of the goal, if needed*
+As a data analyst, I want to view all countries within a specific region ordered by population,  so that I can study demographic differences between regions.
 
 ### Scope
 
-*what system is considered black-box under design*
+Population Reporting System
 
 ### Level
-
-*one of: Summary, Primary task, subfunction*
+Primary task
 
 ### Preconditions
 
-*what we expect is already the state of the world*
+The SQL database is connected.
+
+The database contains valid country data.
 
 ### Success End Condition
 
-*the state of the world upon successful completion*
+A report is displayed showing all countries within a specific region, sorted by population (from largest to smallest), including the columns Code, Name, Continent, Region, Population, and Capital.
 
 ### Failed End Condition
 
-*the state of the world if goal abandoned*
+No report is produced, the system displays an appropriate message.
 
 ### Primary Actor
 
-*a role name for the primary actor, or description*
+Data analyst
 
 ### Trigger
 
-*the action upon the system that starts the use case, may be a time event*
+The analyst selects the command “Countries of the region (selected by user) by population.”
 
 ## MAIN SUCCESS SCENARIO
 
-*put here the steps of the scenario from trigger to goal delivery, and any cleanup after*
+1. The data analyst selects the command “Countries of the Region by Population.”
 
-1. action description
+2. The system checks the database connection.
+
+3. The system constructs an SQL query to retrieve all countries within selected region and their capital cities.
+
+4. The system executes the SQL query.
+
+5. The system sorts the result by population in descending order.
+
+6. The system formats the output with columns: Code, Name, Continent, Region, Population, Capital.
+
+7. The system displays the resulting table to the analyst.
+
+8. The analyst reviews the results — the report is successfully generated.
 
 ## EXTENSIONS
 
-*put here the extensions, one at a time, each referring to the step of the main scenario*
-
-1. **Condition**: action of sub use case
+2. **Database connection error:** Display message “Database unavailable.” Log the issue and terminate the use case.
+4. **SQL execution error:** Display message “Query failed.” Log the issue and terminate the use case.
+6. **No matching data found:** Display “No data found.” and return to the main menu.
+6. **Invalid or missing population values:** Replace with 0 or skip rows; display a warning if applicable.
 
 ## SUB-VARIATIONS
 
-*put here the sub-variations that will cause eventual branching in the scenario
-
-1. list of sub-variations
+None.
 
 ## SCHEDULE
 

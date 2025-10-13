@@ -4,53 +4,78 @@
 
 ### Goal in Context
 
-*a longer statement of the goal, if needed*
+As a data analyst, I want to view the top N most populated countries within a specific region, so that I can analyze regional population concentration.
 
 ### Scope
 
-*what system is considered black-box under design*
+Population Reporting System
 
 ### Level
 
-*one of: Summary, Primary task, subfunction*
+Primary task
 
 ### Preconditions
 
-*what we expect is already the state of the world*
+The SQL database is connected.
+
+The database contains valid country data.
 
 ### Success End Condition
 
-*the state of the world upon successful completion*
+The system displays a list of the top N countries within selected region sorted by population (descending), showing columns: Code, Name, Continent, Region, Population, and Capital.
 
 ### Failed End Condition
 
-*the state of the world if goal abandoned*
+No report is produced, the system displays an appropriate message.
 
 ### Primary Actor
 
-*a role name for the primary actor, or description*
+Data analyst
 
 ### Trigger
 
-*the action upon the system that starts the use case, may be a time event*
+The user selects “Top N Populated Countries within a Region M ” and enters a number N and name of region M.
 
 ## MAIN SUCCESS SCENARIO
 
-*put here the steps of the scenario from trigger to goal delivery, and any cleanup after*
+1. The analyst chooses the option “Top N Populated Countries within the Region M.”
 
-1. action description
+2. The system prompts the analyst to enter a name of region M.
+
+3. The analyst enters a valid string M.
+
+4. The system validates that M is not empty and corresponds to one of the regions in the system.
+
+5. The system prompts the analyst to enter a number N.
+
+6. The analyst enters a valid integer N.
+
+7. The system validates that N > 0 and within an acceptable range.
+
+8. The system constructs and executes an SQL query to retrieve the top N countries, ordered by population descending.
+
+9. The system displays the result with the following columns: Code, Name, Continent, Region, Population, Capital.
+
+10. The analyst views the displayed data.
+
+11. The use case ends successfully.
 
 ## EXTENSIONS
 
-*put here the extensions, one at a time, each referring to the step of the main scenario*
+3. **Invalid input (non-string or wrong name):** Display message “Please enter a correct name.”, return to Step 2.
 
-1. **Condition**: action of sub use case
+7. **Invalid input (non-integer or negative value):** Display message “Please enter a valid positive number.”, return to Step 6.
+
+7. **N too large (greater than total number of countries within selected region):** Display all available countries with a note “Only X countries found within this region.”
+
+8. **Database connection error:** Display “Database unavailable” and log the issue.
+
+8. **SQL query fails:** Display “Error retrieving data” and terminate the use case.
+
 
 ## SUB-VARIATIONS
 
-*put here the sub-variations that will cause eventual branching in the scenario
-
-1. list of sub-variations
+None.
 
 ## SCHEDULE
 

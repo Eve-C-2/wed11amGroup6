@@ -26,7 +26,7 @@ A report is displayed showing all countries within a specific continent, sorted 
 
 ### Failed End Condition
 
-No report is produced.
+No report is produced, the system displays an appropriate message.
 
 ### Primary Actor
 
@@ -52,7 +52,7 @@ The researcher selects the command “Countries of the continent (selected by us
 
 7. The system displays the resulting table to the analyst.
 
-8. The analyst reviews the results — the report is successfully generated.
+8. The researcher reviews the results — the report is successfully generated.
 
 ## EXTENSIONS
 
