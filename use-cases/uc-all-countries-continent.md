@@ -56,10 +56,9 @@ The researcher selects the command “Countries of the continent (selected by us
 
 ## EXTENSIONS
 
-2. **Database connection error:** Display message “Database unavailable.” Log the issue and terminate the use case.
-4. **SQL execution error:** Display message “Query failed.” Log the issue and terminate the use case.
-6. **No matching data found:** Display “No data found.” and return to the main menu.
-6. **Invalid or missing population values:** Replace with 0 or skip rows; display a warning if applicable.
+- Database connection error: Display “Database unavailable” and log the issue.
+- SQL execution error: Query failed and display according error
+- No matching data found: Display “No data found.” and return to the main menu.
 
 ## SUB-VARIATIONS
 
