@@ -12,7 +12,7 @@ Primary task
 ### Preconditions
 The SQL database is connected.
 
-The database contains valid city data.
+The database contains valid population data.
 
 ### Success End Condition
 The system displays a list of the top N cities in a district sorted by population (descending), showing columns:  Name, Country, District, and Population.

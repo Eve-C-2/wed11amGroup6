@@ -20,7 +20,7 @@ Primary task
 
 The SQL database is connected.
 
-The database contains valid city data
+The database contains valid population data
 
 ### Success End Condition
 
