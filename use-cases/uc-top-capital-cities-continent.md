@@ -24,7 +24,7 @@ The database contains valid capital city data
 
 ### Success End Condition
 
-The system displays a report of the top N capital cities in a continent, sorted by population (from largest to smallest), displaying the information: Name, Country, District, and Population.
+The system displays a report of the top N capital cities in a continent, sorted by population (from largest to smallest), displaying the information: Name, Country, and Population.
 
 ### Failed End Condition
 
@@ -50,7 +50,7 @@ The researcher runs the method for “Top N Capital cities in a continent" and e
 
 5.	The system constructs and executes an SQL query to retrieve the top N capital cities in continent, ordered by population descending.
 
-6.	The system displays the result with the following columns: Name, Country, District, and Population.
+6.	The system displays the result with the following columns: Name, Country, and Population.
 
 7.	The analyst views the displayed data.
 
