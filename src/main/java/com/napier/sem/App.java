@@ -143,6 +143,8 @@ public class App
         {
             for (Country countryPopulation : countryList)
             {
+                if (countryPopulation == null)
+                    continue;
                 System.out.println(
                         countryPopulation.Code + " "
                                 + countryPopulation.Name + " "
