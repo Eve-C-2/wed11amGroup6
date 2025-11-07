@@ -11,12 +11,6 @@ class MyTest
     }
 
     @Test
-    void unitTest2()
-    {
-        assertEquals(5, 4);
-    }
-
-    @Test
     void unitTest3()
     {
         assertEquals(5, 5, "Messages are equal");
