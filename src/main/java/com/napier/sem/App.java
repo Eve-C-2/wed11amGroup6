@@ -2,6 +2,7 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class App
 {
@@ -22,6 +23,14 @@ public class App
         ArrayList<Country> countryList = a.countriesByPopulationDesc();
         //print population countries desc
         a.displayCountryPopulations(countryList);
+
+        //Top N populated countries
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter N for top N populated countries: ");
+        int n = scanner.nextInt();
+
+        ArrayList<Country> topNCountries = a.topNPopulatedCountries(n);
+        a.displayCountryPopulations(topNCountries);
 
         // Disconnect from database
         a.disconnect();
@@ -222,4 +231,41 @@ public class App
                 }
             }
         }
+
+    // top N populated countries
+    public ArrayList<Country> topNPopulatedCountries(int n)
+    {
+        ArrayList<Country> countryList = new ArrayList<>();
+
+        try
+        {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population, Capital " +
+                            "FROM country " +
+                            "ORDER BY Population DESC " +
+                            "LIMIT " + n;
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            while (rset.next())
+            {
+                Country countryPopulation = new Country();
+                countryPopulation.Code = rset.getString("Code");
+                countryPopulation.Name = rset.getString("Name");
+                countryPopulation.Continent = rset.getString("Continent");
+                countryPopulation.Region = rset.getString("Region");
+                countryPopulation.Population = rset.getInt("Population");
+                countryPopulation.Capital = rset.getInt("Capital");
+
+                countryList.add(countryPopulation);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get top N populated countries");
+        }
+
+        return countryList;
+    }
 }
