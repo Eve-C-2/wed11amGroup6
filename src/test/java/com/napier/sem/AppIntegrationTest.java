@@ -1,29 +1,29 @@
-//package com.napier.sem;
-//
-//import org.junit.jupiter.api.BeforeAll;
-//import org.junit.jupiter.api.Test;
-//import java.util.ArrayList;
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//public class AppIntegrationTest
-//{
-//    static App app;
-//
-//    @BeforeAll
-//    static void init()
-//    {
-//        app = new App();
-//        app.connect();
-//    }
-//
-//    @Test
-//    void testGetCountry()
-//    {
-//        Country c = app.getCountry("GBR");
-//        assertNotNull(c, "Country should not be null");
-//        assertEquals("GBR", c.Code);
-//        assertEquals("United Kingdom", c.Name);
-//    }
+package com.napier.sem;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class AppIntegrationTest
+{
+    static App app;
+
+    @BeforeAll
+    static void init()
+    {
+        app = new App();
+        app.connect("localhost:33060", 30000);
+    }
+
+    @Test
+    void testGetCountry()
+    {
+        Country c = app.getCountry("GBR");
+        assertNotNull(c, "Country should not be null");
+        assertEquals("GBR", c.Code);
+        assertEquals("United Kingdom", c.Name);
+    }
 //
 //    @Test
 //    void testCountriesByPopulationDesc()
@@ -50,4 +50,4 @@
 //        assertNotNull(topCountries);
 //        assertEquals(n, topCountries.size(), "List size should match N");
 //    }
-//}
+}
