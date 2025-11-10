@@ -24,23 +24,23 @@ public class AppIntegrationTest
         assertEquals("GBR", c.Code);
         assertEquals("United Kingdom", c.Name);
     }
-//
-//    @Test
-//    void testCountriesByPopulationDesc()
-//    {
-//        ArrayList<Country> countries = app.countriesByPopulationDesc();
-//        assertNotNull(countries);
-//        assertFalse(countries.isEmpty(), "Countries list should not be empty");
-//
-//        // Проверим, что они отсортированы по убыванию
-//        for (int i = 1; i < countries.size(); i++)
-//        {
-//            assertTrue(
-//                    countries.get(i - 1).Population >= countries.get(i).Population,
-//                    "Countries should be sorted by population descending"
-//            );
-//        }
-//    }
+
+    @Test
+    void testCountriesByPopulationDesc()
+    {
+        ArrayList<Country> countries = app.countriesByPopulationDesc();
+        assertNotNull(countries);
+        assertFalse(countries.isEmpty(), "Countries list should not be empty");
+
+        // Check that they are sorted in descending order
+        for (int i = 1; i < countries.size(); i++)
+        {
+            assertTrue(
+                    countries.get(i - 1).Population >= countries.get(i).Population,
+                    "Countries should be sorted by population descending"
+            );
+        }
+    }
 //
 //    @Test
 //    void testTopNPopulatedCountries()
