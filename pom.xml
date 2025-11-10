@@ -43,7 +43,7 @@
                         </manifest>
                     </archive>
                     <descriptorRefs>
-                        <descriptorRef>0.1.0.4-jar-with-dependencies</descriptorRef>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <appendassemblyId>false</appendassemblyId>
                 </configuration>
