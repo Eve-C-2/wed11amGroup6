@@ -18,25 +18,25 @@ public class App
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-        // Get Employee
+            // Get Employee
         //Country country = a.getCountry("BIH");
-        // Display results
+            // Display results
         //a.displayCountry(country);
 
-        //country by population desc
-        ArrayList<Country> countryList = a.countriesByPopulationDesc();
-        //print population countries desc
-        a.displayCountryPopulations(countryList);
+            //country by population desc
+        //ArrayList<Country> countryList = a.countriesByPopulationDesc();
+            //print population countries desc
+        //a.displayCountryPopulations(countryList);
 
         //work in progress methods
 
         //Top N populated countries
-        //Scanner scanner = new Scanner(System.in);
-        //System.out.print("Enter N for top N populated countries: ");
-        //int n = scanner.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter N for top N populated countries: ");
+        int n = scanner.nextInt();
 
-        //ArrayList<Country> topNCountries = a.topNPopulatedCountries(n);
-        //a.displayCountryPopulations(topNCountries);
+        ArrayList<Country> topNCountries = a.topNPopulatedCountries(n);
+        a.displayCountryPopulations(topNCountries);
 
         // Disconnect from database
         a.disconnect();

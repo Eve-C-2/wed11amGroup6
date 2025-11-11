@@ -42,13 +42,12 @@ public class AppIntegrationTest
         }
     }
 
-        //STILL TO FULLY IMPLEMENT METHOD
-//    @Test
-//    void testTopNPopulatedCountries()
-//    {
-//        int n = 5;
-//        ArrayList<Country> topCountries = app.topNPopulatedCountries(n);
-//        assertNotNull(topCountries);
-//        assertEquals(n, topCountries.size(), "List size should match N");
-//    }
+    @Test
+    void testTopNPopulatedCountries()
+    {
+        int n = 5;
+        ArrayList<Country> topCountries = app.topNPopulatedCountries(n);
+        assertNotNull(topCountries);
+        assertEquals(n, topCountries.size(), "List size should match N");
+    }
 }
