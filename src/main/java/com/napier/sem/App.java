@@ -28,14 +28,11 @@ public class App
             //print population countries desc
         //a.displayCountryPopulations(countryList);
 
-        //work in progress methods
-
         //Top N populated countries
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter N for top N populated countries: ");
-        int n = scanner.nextInt();
-
-        ArrayList<Country> topNCountries = a.topNPopulatedCountries(n);
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.print("Enter N for top N populated countries: ");
+//        int n = scanner.nextInt();
+        ArrayList<Country> topNCountries = a.topNPopulatedCountries(5);
         a.displayCountryPopulations(topNCountries);
 
         // Disconnect from database
