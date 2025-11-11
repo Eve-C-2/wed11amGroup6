@@ -53,4 +53,12 @@ public class AppTest
         countryArrayList.add(countryPopulation);
         app.displayCountryPopulations(countryArrayList);
     }
+
+    @Test
+    void topNPopulatedCountriesZero()
+    {
+        ArrayList<Country> countryArrayList = new ArrayList<Country>();
+        countryArrayList.add(null);
+        app.displayCountryPopulations(countryArrayList);
+    }
 }
