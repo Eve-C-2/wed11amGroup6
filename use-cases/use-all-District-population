@@ -1,0 +1,73 @@
+USE CASE: Population report for all districts
+CHARACTERISTIC INFORMATION
+Goal in Context
+
+As a researcher, I want to view the population of all districts, so that I can understand the distribution of population across districts.
+
+Scope
+
+Population Reporting System
+
+Level
+
+Primary task
+
+Preconditions
+
+The SQL database is connected.
+
+The database contains valid population data for all districts and their cities.
+
+Success End Condition
+
+A report is displayed showing all districts with:
+
+District Name
+
+Country
+
+Total population of the district (sum of all cities in that district)
+
+Failed End Condition
+
+No report is produced, and the system displays an appropriate message.
+
+Primary Actor
+
+Data researcher
+
+Trigger
+
+The researcher runs the method for “Population report for all districts.”
+
+MAIN SUCCESS SCENARIO
+
+The researcher runs the method “Population report for all districts.”
+
+The system checks the database connection.
+
+The system constructs an SQL query to retrieve all districts and calculate the total population of each district.
+
+The system executes the SQL query.
+
+The system sorts the result by total district population in descending order.
+
+The system formats the output with columns: District Name, Country, and Population.
+
+The report is successfully generated.
+
+EXTENSIONS
+
+Database connection error: Display “Database unavailable” and log the issue.
+
+SQL execution error: Query failed and display an error message.
+
+No matching data found: Display “No data found.” and return to the main menu.
+
+SUB-VARIATIONS
+
+Optionally, allow filtering districts by country or region.
+
+SCHEDULE
+
+DUE DATE: date or release of deployment
