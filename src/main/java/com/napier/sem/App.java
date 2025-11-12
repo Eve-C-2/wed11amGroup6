@@ -1,6 +1,7 @@
 package com.napier.sem;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App
 {
@@ -11,10 +12,16 @@ public class App
 
         // Connect to database
         a.connect();
+
         // Get Employee
-        Country country = a.getCountry("BIH");
+        //Country country = a.getCountry("BIH");
         // Display results
-        a.displayCountry(country);
+        //a.displayCountry(country);
+
+        //country by population desc
+        ArrayList<Country> countryList = a.countriesByPopulationDesc();
+        //print population countries desc
+        a.displayCountryPopulations(countryList);
 
         // Disconnect from database
         a.disconnect();
@@ -87,6 +94,68 @@ public class App
                             + country.Capital + "\n"
                             + country.Code2 + "\n");
         }
+    }
+
+    public ArrayList<Country> countriesByPopulationDesc()
+    {
+        //create arraylist
+        ArrayList<Country> countryList = new ArrayList<>();
+
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
+                            + "FROM country "
+                            + "ORDER BY Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return country if valid.
+            // Check each one is returned
+            while (rset.next())
+            {
+                Country countryPopulation = new Country();
+                countryPopulation.Code = rset.getString("Code");
+                countryPopulation.Name = rset.getString("Name");
+                countryPopulation.Continent = rset.getString("Continent");
+                countryPopulation.Region = rset.getString("Region");
+                countryPopulation.Population = rset.getInt("Population");
+                countryPopulation.Capital = rset.getInt("Capital");
+
+                countryList.add(countryPopulation);
+            }
+
+            return countryList;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country by population");
+            return null;
+        }
+    }
+
+    public void displayCountryPopulations(ArrayList<Country> countryList)
+    {
+        if (countryList != null)
+        {
+            for (Country countryPopulation : countryList)
+            {
+                if (countryPopulation == null)
+                    continue;
+                System.out.println(
+                        countryPopulation.Code + " "
+                                + countryPopulation.Name + " "
+                                + countryPopulation.Continent + " "
+                                + countryPopulation.Region + " "
+                                + countryPopulation.Population + " "
+                                + countryPopulation.Capital + "\n");
+            }
+        }
+        else
+            System.out.println("No entries in countries by population desc.");
     }
 
         /**
