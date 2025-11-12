@@ -48,6 +48,7 @@ jobs:
 
   build:
     name: Build and Start Using docker-compose
+    needs: IntegrationTests
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
