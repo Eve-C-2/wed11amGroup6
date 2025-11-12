@@ -1,8 +1,6 @@
 /*
-
  * APP FOR SOFTWARE ENGINEERING METHODS
  * CONTRIBUTORS: 40715528, 40715528
- *
  */
 
 package com.napier.sem;
