@@ -1,24 +1,24 @@
-USE CASE: Population report for all districts
-CHARACTERISTIC INFORMATION
-Goal in Context
+# USE CASE: Population report for all districts
+## CHARACTERISTIC INFORMATION
+### Goal in Context
 
 As a researcher, I want to view the population of all districts, so that I can understand the distribution of population across districts.
 
-Scope
+### Scope
 
 Population Reporting System
 
-Level
+### Level
 
 Primary task
 
-Preconditions
+### Preconditions
 
 The SQL database is connected.
 
 The database contains valid population data for all districts and their cities.
 
-Success End Condition
+### Success End Condition
 
 A report is displayed showing all districts with:
 
@@ -28,19 +28,19 @@ Country
 
 Total population of the district (sum of all cities in that district)
 
-Failed End Condition
+### Failed End Condition
 
 No report is produced, and the system displays an appropriate message.
 
-Primary Actor
+### Primary Actor
 
 Data researcher
 
-Trigger
+### Trigger
 
 The researcher runs the method for “Population report for all districts.”
 
-MAIN SUCCESS SCENARIO
+## MAIN SUCCESS SCENARIO
 
 The researcher runs the method “Population report for all districts.”
 
@@ -56,7 +56,7 @@ The system formats the output with columns: District Name, Country, and Populati
 
 The report is successfully generated.
 
-EXTENSIONS
+## EXTENSIONS
 
 Database connection error: Display “Database unavailable” and log the issue.
 
@@ -64,10 +64,10 @@ SQL execution error: Query failed and display an error message.
 
 No matching data found: Display “No data found.” and return to the main menu.
 
-SUB-VARIATIONS
+## SUB-VARIATIONS
 
 Optionally, allow filtering districts by country or region.
 
-SCHEDULE
+## SCHEDULE
 
-DUE DATE: date or release of deployment
+**DUE DATE**: *date or release of deployment*
