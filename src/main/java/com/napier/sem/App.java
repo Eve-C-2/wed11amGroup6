@@ -2,7 +2,6 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class App
 {
@@ -57,21 +56,21 @@ public class App
             if (rset.next())
             {
                 Country country = new Country();
-                country.Code = rset.getString("Code");
-                country.Name = rset.getString("Name");
-                country.Continent = rset.getString("Continent");
-                country.Region = rset.getString("Region");
-                country.SurfaceArea = rset.getFloat("SurfaceArea");
-                country.IndepYear = rset.getInt("IndepYear");
-                country.Population = rset.getInt("Population");
-                country.LifeExpectancy = rset.getFloat("LifeExpectancy");
-                country.GNP = rset.getFloat("GNP");
-                country.GNPOld = rset.getFloat("GNPOld");
-                country.LocalName = rset.getString("LocalName");
-                country.GovernmentForm = rset.getString("GovernmentForm");
-                country.HeadOfState = rset.getString("HeadOfState");
-                country.Capital = rset.getInt("Capital");
-                country.Code2 = rset.getString("Code2");
+                rset.getString("Code");
+                rset.getString("Name");
+                rset.getString("Continent");
+                rset.getString("Region");
+                rset.getFloat("SurfaceArea");
+                rset.getInt("IndepYear");
+                rset.getInt("Population");
+                rset.getFloat("LifeExpectancy");
+                rset.getFloat("GNP");
+                rset.getFloat("GNPOld");
+                rset.getString("LocalName");
+                rset.getString("GovernmentForm");
+                rset.getString("HeadOfState");
+                rset.getInt("Capital");
+                rset.getString("Code2");
                 return country;
             }
             else
@@ -90,21 +89,21 @@ public class App
         if (country != null)
         {
             System.out.println(
-                    country.Code + " "
-                            + country.Name + " "
-                            + country.Continent + "\n"
-                            + country.Region + "\n"
-                            + country.SurfaceArea + "\n"
-                            + country.IndepYear + "\n"
-                            + country.Population + "\n"
-                            + country.LifeExpectancy + "\n"
-                            + country.GNP + "\n"
-                            + country.GNPOld + "\n"
-                            + country.LocalName + "\n"
-                            + country.GovernmentForm + "\n"
-                            + country.HeadOfState + "\n"
-                            + country.Capital + "\n"
-                            + country.Code2 + "\n");
+                    country.getCode() + " "
+                            + country.getName() + " "
+                            + country.getContinent() + "\n"
+                            + country.getRegion() + "\n"
+                            + country.getSurfaceArea() + "\n"
+                            + country.getIndepYear() + "\n"
+                            + country.getPopulation() + "\n"
+                            + country.getLifeExpectancy() + "\n"
+                            + country.getGnp() + "\n"
+                            + country.getOldGnp() + "\n"
+                            + country.getLocalName() + "\n"
+                            + country.getGovForm() + "\n"
+                            + country.getHeadOfState() + "\n"
+                            + country.getCapital() + "\n"
+                            + country.getCode2() + "\n");
         }
     }
 
@@ -129,12 +128,12 @@ public class App
             while (rset.next())
             {
                 Country countryPopulation = new Country();
-                countryPopulation.Code = rset.getString("Code");
-                countryPopulation.Name = rset.getString("Name");
-                countryPopulation.Continent = rset.getString("Continent");
-                countryPopulation.Region = rset.getString("Region");
-                countryPopulation.Population = rset.getInt("Population");
-                countryPopulation.Capital = rset.getInt("Capital");
+                countryPopulation.setCode(rset.getString("Code"));
+                countryPopulation.setName(rset.getString("Name"));
+                countryPopulation.setContinent(rset.getString("Continent"));
+                countryPopulation.setRegion(rset.getString("Region"));
+                countryPopulation.setPopulation(rset.getInt("Population"));
+                countryPopulation.setCapital(rset.getInt("Capital"));
 
                 countryList.add(countryPopulation);
             }
@@ -158,12 +157,12 @@ public class App
                 if (countryPopulation == null)
                     continue;
                 System.out.println(
-                        countryPopulation.Code + " "
-                                + countryPopulation.Name + " "
-                                + countryPopulation.Continent + " "
-                                + countryPopulation.Region + " "
-                                + countryPopulation.Population + " "
-                                + countryPopulation.Capital + "\n");
+                        countryPopulation.getCode() + " "
+                                + countryPopulation.getName() + " "
+                                + countryPopulation.getContinent() + " "
+                                + countryPopulation.getRegion() + " "
+                                + countryPopulation.getPopulation() + " "
+                                + countryPopulation.getCapital() + "\n");
             }
         }
         else
@@ -245,12 +244,12 @@ public class App
             while (rset.next())
             {
                 Country countryPopulation = new Country();
-                countryPopulation.Code = rset.getString("Code");
-                countryPopulation.Name = rset.getString("Name");
-                countryPopulation.Continent = rset.getString("Continent");
-                countryPopulation.Region = rset.getString("Region");
-                countryPopulation.Population = rset.getInt("Population");
-                countryPopulation.Capital = rset.getInt("Capital");
+                countryPopulation.setCode(rset.getString("Code"));
+                countryPopulation.setName(rset.getString("Name"));
+                countryPopulation.setContinent(rset.getString("Continent"));
+                countryPopulation.setRegion(rset.getString("Region"));
+                countryPopulation.setPopulation(rset.getInt("Population"));
+                countryPopulation.setCapital(rset.getInt("Capital"));
 
                 countryList.add(countryPopulation);
             }

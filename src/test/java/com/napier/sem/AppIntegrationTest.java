@@ -21,8 +21,8 @@ public class AppIntegrationTest
     {
         Country c = app.getCountry("GBR");
         assertNotNull(c, "Country should not be null");
-        assertEquals("GBR", c.Code);
-        assertEquals("United Kingdom", c.Name);
+        assertEquals("GBR", c.getCode());
+        assertEquals("United Kingdom", c.getName());
     }
 
     @Test
@@ -36,7 +36,7 @@ public class AppIntegrationTest
         for (int i = 1; i < countries.size(); i++)
         {
             assertTrue(
-                    countries.get(i - 1).Population >= countries.get(i).Population,
+                    countries.get(i - 1).getPopulation() >= countries.get(i).getPopulation(),
                     "Countries should be sorted by population descending"
             );
         }
