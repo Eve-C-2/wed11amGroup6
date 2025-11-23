@@ -17,22 +17,24 @@ public class App
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-            // Get Employee
+            // GET COUNTRY
         //Country country = a.getCountry("BIH");
-            // Display results
+            // DISPLAY RESULTS
         //a.displayCountry(country);
 
-            //country by population desc
+            //COUNTRY BY POPULATION DESCENDING
         //ArrayList<Country> countryList = a.countriesByPopulationDesc();
-            //print population countries desc
+            //PRINT POPULATION COUNTRIES DESC
         //a.displayCountryPopulations(countryList);
 
-        //Top N populated countries
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.print("Enter N for top N populated countries: ");
-//        int n = scanner.nextInt();
-        ArrayList<Country> topNCountries = a.topNPopulatedCountries(5);
-        a.displayCountryPopulations(topNCountries);
+        //TOP N POPULATED COUNTRIES
+        //ArrayList<Country> topNCountries = a.topNPopulatedCountries(5);
+        //a.displayCountryPopulations(topNCountries);
+
+        //CITY BY POPULATION DESCENDING
+        ArrayList<City> cityList = a.citiesByPopulationDesc();
+        //PRINT POPULATION CITIES DESC
+        a.displayCityPopulations(cityList);
 
         // Disconnect from database
         a.disconnect();
@@ -261,5 +263,63 @@ public class App
         }
 
         return countryList;
+    }
+
+    public ArrayList<City> citiesByPopulationDesc()
+    {
+        //create arraylist
+        ArrayList<City> cityList = new ArrayList<>();
+
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, CountryCode, District, Population "
+                            + "FROM city "
+                            + "ORDER BY Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return city if valid.
+            // Check each one is returned
+            while (rset.next())
+            {
+                City cityPopulationSort = new City();
+                cityPopulationSort.setCityName(rset.getString("Name"));
+                cityPopulationSort.setCityCountry(rset.getString("CountryCode"));
+                cityPopulationSort.setCityDistrict(rset.getString("District"));
+                cityPopulationSort.setCityPopulation(rset.getInt("Population"));
+
+                cityList.add(cityPopulationSort);
+            }
+
+            return cityList;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city by population");
+            return null;
+        }
+    }
+
+    public void displayCityPopulations(ArrayList<City> cityList)
+    {
+        if (cityList != null)
+        {
+            for (City cityPopulationSort : cityList)
+            {
+                if (cityPopulationSort == null)
+                    continue;
+                System.out.println(
+                        cityPopulationSort.getCityName() + " "
+                                + cityPopulationSort.getCityCountry() + " "
+                                + cityPopulationSort.getCityDistrict() + " "
+                                + cityPopulationSort.getCityPopulation() + "\n");
+            }
+        }
+        else
+            System.out.println("No entries in cities by population desc.");
     }
 }
