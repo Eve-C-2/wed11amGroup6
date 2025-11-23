@@ -1,7 +1,7 @@
 package com.napier.sem;
 
 /**
- * Represents an employee
+ * Represents a country
  */
 public class Country {
     /**
@@ -83,8 +83,8 @@ public class Country {
     public Country(){}
 
     //CONSTRUCTOR 2
-    public Country(String code, String name, String continent, String region, Float surfaceArea, Integer indepYear, Integer population, Float lifeExpectancy, Float gnp, Float gnpOld, String localName, String governmentForm, String headOfState, Integer capital, String code2) {
-        // 'this.field' is necessary here to distinguish the class field from the method parameter
+    public Country(String code, String name, String continent, String region, Float surfaceArea, Integer indepYear, Integer population, Float lifeExpectancy, Float gnp, Float gnpold, String localName, String governmentForm, String headOfState, Integer capital, String code2)
+    {
         this.code = code;
         this.name = name;
         this.continent = continent;
