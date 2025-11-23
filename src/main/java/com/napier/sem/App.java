@@ -56,21 +56,21 @@ public class App
             if (rset.next())
             {
                 Country country = new Country();
-                rset.getString("Code");
-                rset.getString("Name");
-                rset.getString("Continent");
-                rset.getString("Region");
-                rset.getFloat("SurfaceArea");
-                rset.getInt("IndepYear");
-                rset.getInt("Population");
-                rset.getFloat("LifeExpectancy");
-                rset.getFloat("GNP");
-                rset.getFloat("GNPOld");
-                rset.getString("LocalName");
-                rset.getString("GovernmentForm");
-                rset.getString("HeadOfState");
-                rset.getInt("Capital");
-                rset.getString("Code2");
+                country.setCode(rset.getString("Code"));
+                country.setName(rset.getString("Name"));
+                country.setContinent(rset.getString("Continent"));
+                country.setRegion(rset.getString("Region"));
+                country.setSurfaceArea(rset.getFloat("SurfaceArea"));
+                country.setIndepYear(rset.getInt("IndepYear"));
+                country.setPopulation(rset.getInt("Population"));
+                country.setLifeExpectancy(rset.getFloat("LifeExpectancy"));
+                country.setGnp(rset.getFloat("GNP"));
+                country.setOldGnp(rset.getFloat("GNPOld"));
+                country.setLocalName(rset.getString("LocalName"));
+                country.setGovForm(rset.getString("GovernmentForm"));
+                country.setHeadOfState(rset.getString("HeadOfState"));
+                country.setCapital(rset.getInt("Capital"));
+                country.setCode2(rset.getString("Code2"));
                 return country;
             }
             else
