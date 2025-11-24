@@ -2,50 +2,106 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class App
 {
     public static void main(String[] args)
     {
-        // Create new Application
         App a = new App();
 
         // Connect to database
-        if(args.length < 1){
-            a.connect("localhost:33060", 30000);
-        }else{
+        if (args.length < 1) {
+            a.connect("localhost:33060", 300);
+        } else {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-            // GET COUNTRY
-        //Country country = a.getCountry("BIH");
-            // DISPLAY RESULTS
-        //a.displayCountry(country);
-
-            //COUNTRY BY POPULATION DESCENDING
-        //ArrayList<Country> countryList = a.countriesByPopulationDesc();
-            //PRINT POPULATION COUNTRIES DESC
-        //a.displayCountryPopulations(countryList);
-
-        //TOP N POPULATED COUNTRIES
-        //ArrayList<Country> topNCountries = a.topNPopulatedCountries(5);
-        //a.displayCountryPopulations(topNCountries);
-
-        //CITY BY POPULATION DESCENDING
-        ArrayList<City> cityList = a.citiesByPopulationDesc();
-        //PRINT POPULATION CITIES DESC
-        a.displayCityPopulations(cityList);
-
-        //TOP N POPULATED CITIES
-        int n = 5;
-        System.out.println("===== TOP " + n + " POPULATED CITIES =====");
-        ArrayList<City> topCities = a.topNPopulatedCities(n);
-        a.displayCityPopulations(topCities);
-
-
-        // Disconnect from database
-        a.disconnect();
+        try {
+            runMenu(a);
+        } finally {
+            a.disconnect();
+        }
     }
+
+    //MENU
+    private static void runMenu(App a) {
+        try (Scanner sc = new Scanner(System.in)) {
+            while (true) {
+                System.out.println();
+                System.out.println("===== MENU =====");
+                System.out.println("1) Get country by code");
+                System.out.println("2) Countries by population (DESC)");
+                System.out.println("3) Top N populated countries");
+                System.out.println("4) Cities by population (DESC)");
+                System.out.println("5) Top N populated cities");
+                System.out.println("0) Exit");
+                System.out.print("Choose option: ");
+
+                String choice = sc.nextLine().trim();
+                switch (choice) {
+                    case "1": {
+                        System.out.print("Enter country code (e.g., GBR): ");
+                        String code = sc.nextLine().trim();
+                        Country c = a.getCountry(code);
+                        if (c == null) {
+                            System.out.println("No country found for code: " + code);
+                        } else {
+                            a.displayCountry(c);
+                        }
+                        break;
+                    }
+                    case "2": {
+                        System.out.println("===== COUNTRIES BY POPULATION (DESC) =====");
+                        ArrayList<Country> list = a.countriesByPopulationDesc();
+                        a.displayCountryPopulations(list);
+                        break;
+                    }
+                    case "3": {
+                        int n = readInt(sc, "Enter N (top countries)", 5);
+                        System.out.println("===== TOP " + n + " POPULATED COUNTRIES =====");
+                        ArrayList<Country> list = a.topNPopulatedCountries(n);
+                        a.displayCountryPopulations(list);
+                        break;
+                    }
+                    case "4": {
+                        System.out.println("===== CITIES BY POPULATION (DESC) =====");
+                        ArrayList<City> list = a.citiesByPopulationDesc();
+                        a.displayCityPopulations(list);
+                        break;
+                    }
+                    case "5": {
+                        int n = readInt(sc, "Enter N (top cities)", 5);
+                        System.out.println("===== TOP " + n + " POPULATED CITIES =====");
+                        ArrayList<City> list = a.topNPopulatedCities(n);
+                        a.displayCityPopulations(list);
+                        break;
+                    }
+                    case "0":
+                        System.out.println("Bye!");
+                        return;
+                    default:
+                        System.out.println("Unknown option. Try again.");
+                }
+            }
+        }
+    }
+
+    private static int readInt(Scanner sc, String prompt, int defVal) {
+        System.out.print(prompt + " [default " + defVal + "]: ");
+        String line = sc.nextLine().trim();
+        if (line.isEmpty()) return defVal;
+        try {
+            int v = Integer.parseInt(line);
+            if (v <= 0) throw new NumberFormatException();
+            return v;
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number. Using default: " + defVal);
+            return defVal;
+        }
+    }
+
 
     public Country getCountry(String countryCode) {
         String sql = SqlLoader.load("sql/get_country.sql");
@@ -181,7 +237,7 @@ public class App
                     System.out.println("Successfully connected");
                     break;
                 } catch (SQLException sqle) {
-                    System.out.println("Failed to connect to database attempt " +                                  Integer.toString(i));
+                    System.out.println("Failed to connect to database attempt " + i);
                     System.out.println(sqle.getMessage());
                 } catch (InterruptedException ie) {
                     System.out.println("Thread interrupted? Should not happen.");
