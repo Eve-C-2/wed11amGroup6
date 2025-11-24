@@ -19,7 +19,15 @@ public class App
         }
 
         try {
-            runMenu(a);
+            if (System.getenv("CI") != null) {
+                // GitHub Actions environment detected
+                System.out.println("Running in CI environment — using hard-coded values");
+                ArrayList<City> topCities = a.topNPopulatedCities(5);
+                a.displayCityPopulations(topCities);
+            } else {
+                runMenu(a);
+            }
+
         } finally {
             a.disconnect();
         }
