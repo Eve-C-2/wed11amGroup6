@@ -2,38 +2,53 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 
 public class App
 {
     public static void main(String[] args)
     {
+        // Create new Application
         App a = new App();
 
         // Connect to database
-        if (args.length < 1) {
+        if(args.length < 1){
             a.connect("localhost:33060", 300);
-        } else {
+        }else{
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-        try {
-            if (System.getenv("CI") != null) {
-                // GitHub Actions environment detected
-                System.out.println("Running in CI environment — using hard-coded values");
-                ArrayList<City> topCities = a.topNPopulatedCities(5);
-                a.displayCityPopulations(topCities);
-            } else {
-                runMenu(a);
-            }
+        // GET COUNTRY
+        //Country country = a.getCountry("BIH");
+        // DISPLAY RESULTS
+        //a.displayCountry(country);
 
-        } finally {
-            a.disconnect();
-        }
+        //COUNTRY BY POPULATION DESCENDING
+        //ArrayList<Country> countryList = a.countriesByPopulationDesc();
+        //PRINT POPULATION COUNTRIES DESC
+        //a.displayCountryPopulations(countryList);
+
+        //TOP N POPULATED COUNTRIES
+        //ArrayList<Country> topNCountries = a.topNPopulatedCountries(5);
+        //a.displayCountryPopulations(topNCountries);
+
+        //CITY BY POPULATION DESCENDING
+        System.out.println("===== CITIES BY POPULATION DESCENDING =====");
+        ArrayList<City> cityList = a.citiesByPopulationDesc();
+        //PRINT POPULATION CITIES DESC
+        a.displayCityPopulations(cityList);
+
+        //TOP N POPULATED CITIES
+        int n = 5;
+        System.out.println("===== TOP " + n + " POPULATED CITIES =====");
+        ArrayList<City> topCities = a.topNPopulatedCities(n);
+        a.displayCityPopulations(topCities);
+
+
+        // Disconnect from database
+        a.disconnect();
     }
 
-    //MENU
+   /* //MENU
     private static void runMenu(App a) {
         try (Scanner sc = new Scanner(System.in)) {
             while (true) {
@@ -108,7 +123,7 @@ public class App
             System.out.println("Invalid number. Using default: " + defVal);
             return defVal;
         }
-    }
+    }*/
 
 
     public Country getCountry(String countryCode) {
