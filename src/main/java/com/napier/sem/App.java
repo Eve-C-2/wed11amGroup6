@@ -40,51 +40,39 @@ public class App
         a.disconnect();
     }
 
-    public Country getCountry(String countryCode)
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
-                            + "FROM country "
-                            + "WHERE Code = '" + countryCode + "'";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            if (rset.next())
-            {
-                Country country = new Country();
-                country.setCode(rset.getString("Code"));
-                country.setName(rset.getString("Name"));
-                country.setContinent(rset.getString("Continent"));
-                country.setRegion(rset.getString("Region"));
-                country.setSurfaceArea(rset.getFloat("SurfaceArea"));
-                country.setIndepYear(rset.getInt("IndepYear"));
-                country.setPopulation(rset.getInt("Population"));
-                country.setLifeExpectancy(rset.getFloat("LifeExpectancy"));
-                country.setGnp(rset.getFloat("GNP"));
-                country.setOldGnp(rset.getFloat("GNPOld"));
-                country.setLocalName(rset.getString("LocalName"));
-                country.setGovForm(rset.getString("GovernmentForm"));
-                country.setHeadOfState(rset.getString("HeadOfState"));
-                country.setCapital(rset.getInt("Capital"));
-                country.setCode2(rset.getString("Code2"));
-                return country;
-            }
-            else
+    public Country getCountry(String countryCode) {
+        String sql = SqlLoader.load("sql/get_country.sql");
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, countryCode);
+            try (ResultSet rset = ps.executeQuery()) {
+                if (rset.next()) {
+                    Country country = new Country();
+                    country.setCode(rset.getString("Code"));
+                    country.setName(rset.getString("Name"));
+                    country.setContinent(rset.getString("Continent"));
+                    country.setRegion(rset.getString("Region"));
+                    country.setSurfaceArea(rset.getFloat("SurfaceArea"));
+                    country.setIndepYear(rset.getInt("IndepYear"));
+                    country.setPopulation(rset.getInt("Population"));
+                    country.setLifeExpectancy(rset.getFloat("LifeExpectancy"));
+                    country.setGnp(rset.getFloat("GNP"));
+                    country.setOldGnp(rset.getFloat("GNPOld"));
+                    country.setLocalName(rset.getString("LocalName"));
+                    country.setGovForm(rset.getString("GovernmentForm"));
+                    country.setHeadOfState(rset.getString("HeadOfState"));
+                    country.setCapital(rset.getInt("Capital"));
+                    country.setCode2(rset.getString("Code2"));
+                    return country;
+                }
                 return null;
-        }
-        catch (Exception e)
-        {
+            }
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get country details");
             return null;
         }
     }
+
 
     public void displayCountry(Country country)
     {
@@ -109,46 +97,31 @@ public class App
         }
     }
 
-    public ArrayList<Country> countriesByPopulationDesc()
-    {
-        //create arraylist
+    public ArrayList<Country> countriesByPopulationDesc() {
         ArrayList<Country> countryList = new ArrayList<>();
+        String sql = SqlLoader.load("sql/countries_by_population_desc.sql");
 
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Code, Name, Continent, Region, Population, Capital "
-                            + "FROM country "
-                            + "ORDER BY Population DESC";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return country if valid.
-            // Check each one is returned
-            while (rset.next())
-            {
-                Country countryPopulation = new Country();
-                countryPopulation.setCode(rset.getString("Code"));
-                countryPopulation.setName(rset.getString("Name"));
-                countryPopulation.setContinent(rset.getString("Continent"));
-                countryPopulation.setRegion(rset.getString("Region"));
-                countryPopulation.setPopulation(rset.getInt("Population"));
-                countryPopulation.setCapital(rset.getInt("Capital"));
+        try (PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rset = ps.executeQuery()) {
 
-                countryList.add(countryPopulation);
+            while (rset.next()) {
+                Country c = new Country();
+                c.setCode(rset.getString("Code"));
+                c.setName(rset.getString("Name"));
+                c.setContinent(rset.getString("Continent"));
+                c.setRegion(rset.getString("Region"));
+                c.setPopulation(rset.getInt("Population"));
+                c.setCapital(rset.getInt("Capital"));
+                countryList.add(c);
             }
-
             return countryList;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get country by population");
             return null;
         }
     }
+
 
     public void displayCountryPopulations(ArrayList<Country> countryList)
     {
@@ -229,80 +202,55 @@ public class App
         }
 
     // top N populated countries
-    public ArrayList<Country> topNPopulatedCountries(int n)
-    {
+    public ArrayList<Country> topNPopulatedCountries(int n) {
         ArrayList<Country> countryList = new ArrayList<>();
+        String sql = SqlLoader.load("sql/top_n_countries.sql");
 
-        try
-        {
-            Statement stmt = con.createStatement();
-            String strSelect =
-                    "SELECT Code, Name, Continent, Region, Population, Capital " +
-                            "FROM country " +
-                            "ORDER BY Population DESC " +
-                            "LIMIT " + n;
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while (rset.next())
-            {
-                Country countryPopulation = new Country();
-                countryPopulation.setCode(rset.getString("Code"));
-                countryPopulation.setName(rset.getString("Name"));
-                countryPopulation.setContinent(rset.getString("Continent"));
-                countryPopulation.setRegion(rset.getString("Region"));
-                countryPopulation.setPopulation(rset.getInt("Population"));
-                countryPopulation.setCapital(rset.getInt("Capital"));
-
-                countryList.add(countryPopulation);
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, n); // параметр для LIMIT
+            try (ResultSet rset = ps.executeQuery()) {
+                while (rset.next()) {
+                    Country c = new Country();
+                    c.setCode(rset.getString("Code"));
+                    c.setName(rset.getString("Name"));
+                    c.setContinent(rset.getString("Continent"));
+                    c.setRegion(rset.getString("Region"));
+                    c.setPopulation(rset.getInt("Population"));
+                    c.setCapital(rset.getInt("Capital"));
+                    countryList.add(c);
+                }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get top N populated countries");
         }
-
         return countryList;
     }
 
-    public ArrayList<City> citiesByPopulationDesc()
-    {
-        //create arraylist
+
+    public ArrayList<City> citiesByPopulationDesc() {
         ArrayList<City> cityList = new ArrayList<>();
+        String sql = SqlLoader.load("sql/cities_by_population_desc.sql");
 
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Name, CountryCode, District, Population "
-                            + "FROM city "
-                            + "ORDER BY Population DESC";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return city if valid.
-            // Check each one is returned
-            while (rset.next())
-            {
-                City cityPopulationSort = new City();
-                cityPopulationSort.setCityName(rset.getString("Name"));
-                cityPopulationSort.setCityCountry(rset.getString("CountryCode"));
-                cityPopulationSort.setCityDistrict(rset.getString("District"));
-                cityPopulationSort.setCityPopulation(rset.getInt("Population"));
+        try (PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rset = ps.executeQuery()) {
 
-                cityList.add(cityPopulationSort);
+            while (rset.next()) {
+                City city = new City();
+                city.setCityName(rset.getString("Name"));
+                city.setCityCountry(rset.getString("CountryCode"));
+                city.setCityDistrict(rset.getString("District"));
+                city.setCityPopulation(rset.getInt("Population"));
+                cityList.add(city);
             }
-
             return cityList;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city by population");
             return null;
         }
     }
+
 
     public void displayCityPopulations(ArrayList<City> cityList)
     {

@@ -1,0 +1,4 @@
+SELECT Code, Name, Continent, Region, Population, Capital
+FROM country
+ORDER BY Population DESC
+LIMIT ?;
