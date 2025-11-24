@@ -36,6 +36,13 @@ public class App
         //PRINT POPULATION CITIES DESC
         a.displayCityPopulations(cityList);
 
+        //TOP N POPULATED CITIES
+        int n = 5;
+        System.out.println("===== TOP " + n + " POPULATED CITIES =====");
+        ArrayList<City> topCities = a.topNPopulatedCities(n);
+        a.displayCityPopulations(topCities);
+
+
         // Disconnect from database
         a.disconnect();
     }
@@ -225,6 +232,31 @@ public class App
             System.out.println("Failed to get top N populated countries");
         }
         return countryList;
+    }
+
+    //Top N Populated Cities
+    public ArrayList<City> topNPopulatedCities(int n) {
+        ArrayList<City> cityList = new ArrayList<>();
+        String sql = SqlLoader.load("sql/top_n_cities.sql");
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, n);  // параметр для LIMIT
+            try (ResultSet rset = ps.executeQuery()) {
+                while (rset.next()) {
+                    City city = new City();
+                    city.setCityName(rset.getString("Name"));
+                    city.setCityCountry(rset.getString("CountryCode"));
+                    city.setCityDistrict(rset.getString("District"));
+                    city.setCityPopulation(rset.getInt("Population"));
+                    cityList.add(city);
+                }
+            }
+            return cityList;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get top N populated cities");
+            return null;
+        }
     }
 
 
