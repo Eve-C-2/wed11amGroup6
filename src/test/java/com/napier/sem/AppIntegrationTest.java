@@ -42,6 +42,23 @@ public class AppIntegrationTest
         }
     }
 
+    @Test
+    void testCitiesByPopulationDesc()
+    {
+        ArrayList<City> cities = app.citiesByPopulationDesc();
+        assertNotNull(cities);
+        assertFalse(cities.isEmpty(), "Cities list should not be empty");
+
+        // Check that they are sorted in descending order
+        for (int i = 1; i < cities.size(); i++)
+        {
+            assertTrue(
+                    cities.get(i - 1).getCityPopulation() >= cities.get(i).getCityPopulation(),
+                    "Cities should be sorted by population descending"
+            );
+        }
+    }
+
     //unit test for top n populated countries
 //    @Test
 //    void TopNPopulatedCountriesZero()
