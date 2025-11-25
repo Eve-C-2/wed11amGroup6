@@ -5,4 +5,4 @@
 # DevOps
 ![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/twinky945/sem/main.yml?branch=develop&style=flat-square)
 
-Edit for commit
+Edit for commit x2
