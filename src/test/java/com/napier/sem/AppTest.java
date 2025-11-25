@@ -2,11 +2,8 @@ package com.napier.sem;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class AppTest
 {
@@ -44,12 +41,12 @@ public class AppTest
     {
         ArrayList<Country> countryArrayList = new ArrayList<Country>();
         Country countryPopulation = new Country();
-        countryPopulation.Code = "EVE";
-        countryPopulation.Name = "Name";
-        countryPopulation.Region = "Region";
-        countryPopulation.Population = 12345;
-        countryPopulation.Continent = "Continent";
-        countryPopulation.Capital = 1;
+        countryPopulation.setCode("EVE");
+        countryPopulation.setName("Name");
+        countryPopulation.setRegion("Region");
+        countryPopulation.setPopulation(12345);
+        countryPopulation.setContinent("Continent");
+        countryPopulation.setCapital(1);
         countryArrayList.add(countryPopulation);
         app.displayCountryPopulations(countryArrayList);
     }
