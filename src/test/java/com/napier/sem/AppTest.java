@@ -58,4 +58,27 @@ public class AppTest
         countryArrayList.add(null);
         app.displayCountryPopulations(countryArrayList);
     }
+
+    @Test
+    void displayCityPopulationsEmpty()
+    {
+        ArrayList<City> cityArrayList = new ArrayList<City>();
+        app.displayCityPopulations(cityArrayList);
+    }
+
+    @Test
+    void displayCityPopulationsContainsNull()
+    {
+        ArrayList<City> cityArrayList = new ArrayList<City>();
+        cityArrayList.add(null);
+        app.displayCityPopulations(cityArrayList);
+    }
+
+    @Test
+    void topNPopulatedCitiesZero()
+    {
+        ArrayList<City> cityArrayList = new ArrayList<City>();
+        cityArrayList.add(null);
+        app.displayCityPopulations(cityArrayList);
+    }
 }
